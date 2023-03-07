@@ -1,2 +1,2 @@
-# RGN Currency# RGN Currency
-version: 0.1.0-dev.105
+# RGN Currency
+version: 0.1.0-dev.106
