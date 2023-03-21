@@ -12,24 +12,30 @@ namespace RGN.Samples
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private LoadingIndicator _fullScreenLoadingIndicator;
         [SerializeField] private RectTransform _rgnCoinItemsContent;
+        [SerializeField] private RectTransform _customCoinItemsContent;
 
+        [Header("Prefabs")]
         [SerializeField] private RGNCoinItem _rgnCoinItemPrefab;
+        [SerializeField] private CustomCoinItem _customCoinItemPrefab;
 
         private bool _triedToLoad;
         private List<RGNCoinItem> _rgnCoinItems;
+        private List<CustomCoinItem> _customCoinItems;
 
         public override void PreInit(IRGNFrame rgnFrame)
         {
             base.PreInit(rgnFrame);
             _rgnCoinItems = new List<RGNCoinItem>();
+            _customCoinItems = new List<CustomCoinItem>();
         }
-        protected override void OnShow()
+        protected override async void OnShow()
         {
             if (_triedToLoad)
             {
                 return;
             }
-            ReloadRGNCoinOffersAsync();
+            await ReloadRGNCoinOffersAsync();
+            await ReloadCustomCoinOffersAsync();
         }
 
         internal void SetUIInteractable(bool interactable)
@@ -54,7 +60,10 @@ namespace RGN.Samples
                 item.Init(this, i, product);
                 _rgnCoinItems.Add(item);
             }
-            _rgnCoinItemsContent.sizeDelta = new Vector2(_rgnCoinItems.Count * (_rgnCoinItemPrefab.GetWidth() + RGNCoinItem.GAB_BETWEEN_ITEMS), 0);
+            _rgnCoinItemsContent.sizeDelta = 
+                new Vector2(
+                    _rgnCoinItems.Count * (_rgnCoinItemPrefab.GetWidth() + RGNCoinItem.GAB_BETWEEN_ITEMS),
+                    0);
             SetUIInteractable(true);
         }
 
@@ -65,6 +74,37 @@ namespace RGN.Samples
                 _rgnCoinItems[i].Dispose();
             }
             _rgnCoinItems.Clear();
+        }
+        private Task ReloadCustomCoinOffersAsync()
+        {
+            DisposeCustomCoinOffers();
+            return LoadCustomCoinOffersAsync();
+        }
+        private async Task LoadCustomCoinOffersAsync()
+        {
+            SetUIInteractable(false);
+            var offers = await CurrencyModule.I.GetInAppPurchaseCurrencyDataAsync();
+            for (int i = 0; i < offers.products.Count; i++)
+            {
+                var product = offers.products[i];
+                CustomCoinItem item = Instantiate(_customCoinItemPrefab, _customCoinItemsContent);
+                item.Init(this, i, product);
+                _customCoinItems.Add(item);
+            }
+            _customCoinItemsContent.sizeDelta =
+                new Vector2(
+                    _customCoinItems.Count * (_rgnCoinItemPrefab.GetWidth() + CustomCoinItem.GAB_BETWEEN_ITEMS),
+                    0);
+            SetUIInteractable(true);
+        }
+
+        private void DisposeCustomCoinOffers()
+        {
+            for (int i = 0; i < _customCoinItems.Count; i++)
+            {
+                _customCoinItems[i].Dispose();
+            }
+            _customCoinItems.Clear();
         }
     }
 }
