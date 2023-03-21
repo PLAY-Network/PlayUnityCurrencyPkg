@@ -382,6 +382,7 @@ MonoBehaviour:
   _fullScreenLoadingIndicator: {fileID: 2305369105637012492}
   _rgnCoinItemsContent: {fileID: 8628026842840068922}
   _customCoinItemsContent: {fileID: 5898929486682613232}
+  _pullToReloadTheProducts: {fileID: 4640036168483479237}
   _rgnCoinItemPrefab: {fileID: 7662311289651269646, guid: 86c6a016f5866a34680180271434b07e, type: 3}
   _customCoinItemPrefab: {fileID: 4461273778145859405, guid: f9dc2e43d0c5c6f47afce754325d14ce, type: 3}
 --- !u!225 &5273574290361389196
@@ -906,6 +907,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1255364579522350936}
   - component: {fileID: 2724249077944180319}
+  - component: {fileID: 4640036168483479237}
   m_Layer: 5
   m_Name: ScrollView
   m_TagString: Untagged
@@ -963,6 +965,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4640036168483479237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559133992014743025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f86eb251fccdc9f4ca8139e0696465c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _reloadImagePrefab: {fileID: 5322230921392865710, guid: 9a8c25b81392f83478434c81b478f346, type: 3}
+  _refreshDistance: 100
 --- !u!1001 &5273574289016964875
 PrefabInstance:
   m_ObjectHideFlags: 0

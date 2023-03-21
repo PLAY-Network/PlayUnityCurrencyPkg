@@ -13,6 +13,7 @@ namespace RGN.Samples
         [SerializeField] private LoadingIndicator _fullScreenLoadingIndicator;
         [SerializeField] private RectTransform _rgnCoinItemsContent;
         [SerializeField] private RectTransform _customCoinItemsContent;
+        [SerializeField] private PullToRefresh _pullToReloadTheProducts;
 
         [Header("Prefabs")]
         [SerializeField] private RGNCoinItem _rgnCoinItemPrefab;
@@ -27,6 +28,12 @@ namespace RGN.Samples
             base.PreInit(rgnFrame);
             _rgnCoinItems = new List<RGNCoinItem>();
             _customCoinItems = new List<CustomCoinItem>();
+            _pullToReloadTheProducts.RefreshRequested += ReloadAllProductsAsync;
+        }
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            _pullToReloadTheProducts.RefreshRequested -= ReloadAllProductsAsync;
         }
         protected override async void OnShow()
         {
@@ -34,8 +41,8 @@ namespace RGN.Samples
             {
                 return;
             }
-            await ReloadRGNCoinOffersAsync();
-            await ReloadCustomCoinOffersAsync();
+            _triedToLoad = true;
+            await ReloadAllProductsAsync();
         }
 
         internal void SetUIInteractable(bool interactable)
@@ -44,6 +51,11 @@ namespace RGN.Samples
             _fullScreenLoadingIndicator.SetEnabled(!interactable);
         }
 
+        private async Task ReloadAllProductsAsync()
+        {
+            await ReloadRGNCoinOffersAsync();
+            await ReloadCustomCoinOffersAsync();
+        }
         private Task ReloadRGNCoinOffersAsync()
         {
             DisposeRGNCoinOffers();
