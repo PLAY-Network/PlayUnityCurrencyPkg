@@ -14,6 +14,9 @@ namespace RGN.Samples
         [SerializeField] private RectTransform _rgnCoinItemsContent;
         [SerializeField] private RectTransform _customCoinItemsContent;
         [SerializeField] private PullToRefresh _pullToReloadTheProducts;
+        [SerializeField] private TMPro.TMP_InputField _currencyNameInputField;
+        [SerializeField] private TMPro.TMP_InputField _currencyQuantityInputField;
+        [SerializeField] private RGNButton _addCurrencyButton;
 
         [Header("Prefabs")]
         [SerializeField] private RGNCoinItem _rgnCoinItemPrefab;
@@ -29,11 +32,13 @@ namespace RGN.Samples
             _rgnCoinItems = new List<RGNCoinItem>();
             _customCoinItems = new List<CustomCoinItem>();
             _pullToReloadTheProducts.RefreshRequested += ReloadAllProductsAsync;
+            _addCurrencyButton.Button.onClick.AddListener(OnAddCurrencyButtonClickAsync);
         }
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
             _pullToReloadTheProducts.RefreshRequested -= ReloadAllProductsAsync;
+            _addCurrencyButton.Button.onClick.RemoveListener(OnAddCurrencyButtonClickAsync);
         }
         protected override async void OnShow()
         {
@@ -51,6 +56,49 @@ namespace RGN.Samples
             _fullScreenLoadingIndicator.SetEnabled(!interactable);
         }
 
+        private async void OnAddCurrencyButtonClickAsync()
+        {
+            SetUIInteractable(false);
+            bool failed = false;
+            string currencyName = _currencyNameInputField.text;
+            if (string.IsNullOrWhiteSpace(currencyName))
+            {
+                ToastMessage.I.Show("Please specify currency name");
+                SetUIInteractable(true);
+                return;
+            }
+            string currencyQuantityStr = _currencyQuantityInputField.text;
+            if (string.IsNullOrWhiteSpace(currencyQuantityStr))
+            {
+                ToastMessage.I.Show("Please specify currency quantity");
+                SetUIInteractable(true);
+                return;
+            }
+            if (!int.TryParse(currencyQuantityStr, out int quantity))
+            {
+                ToastMessage.I.ShowError("Can not parse currency quantity to integer value");
+                SetUIInteractable(true);
+                return;
+            }
+            try
+            {
+                var currencyToAdd = new List<Currency>() {
+                    new Currency(currencyName, quantity)
+                };
+                await CurrencyModule.I.AddCurrencyAsync(currencyToAdd);
+            }
+            catch (System.Exception ex)
+            {
+                failed = true;
+                Debug.LogException(ex);
+                ToastMessage.I.ShowError(ex.Message);
+            }
+            if (!failed)
+            {
+                ToastMessage.I.ShowSuccess("Successfully added " + currencyQuantityStr + " " + currencyName);
+            }
+            SetUIInteractable(true);
+        }
         private async Task ReloadAllProductsAsync()
         {
             await ReloadRGNCoinOffersAsync();
@@ -72,7 +120,7 @@ namespace RGN.Samples
                 item.Init(this, i, product);
                 _rgnCoinItems.Add(item);
             }
-            _rgnCoinItemsContent.sizeDelta = 
+            _rgnCoinItemsContent.sizeDelta =
                 new Vector2(
                     _rgnCoinItems.Count * (_rgnCoinItemPrefab.GetWidth() + RGNCoinItem.GAB_BETWEEN_ITEMS),
                     0);
