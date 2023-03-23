@@ -23,7 +23,17 @@
     "/package.json",
     "/package.json.meta",
     "/ReadyGamesNetwork",
-    "/ReadyGamesNetwork.meta"
+    "/ReadyGamesNetwork.meta",
+    "/Samples",
+    "/Samples.meta",
+    "/Samples~"
+  ],
+  "samples": [
+    {
+      "displayName": "Currency Example",
+      "description": "Contains a simple example of how to purchase rgn-coin and other custom currencies.",
+      "path": "Samples~/CurrencyExample"
+    }
   ],
   "dependencies": {
     "io.getready.rgn.core": "0.1.0"
