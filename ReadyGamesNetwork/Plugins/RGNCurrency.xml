@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RGNCurrency</name>
+    </assembly>
+    <members>
+        <member name="T:RGN.Modules.Currency.CurrencyModule">
+            <summary>
+            Module for managing in game currency (IAP)
+            The RGNCoin is a special currency that you need to sell only by in-app purchases
+            It is possible to use also custom currencies that you can sell by in-app,
+            or just give the user as a reward
+            </summary>
+        </member>
+    </members>
+</doc>
