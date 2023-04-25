@@ -9,8 +9,53 @@
             Module for managing in game currency (IAP)
             The RGNCoin is a special currency that you need to sell only by in-app purchases
             It is possible to use also custom currencies that you can sell by in-app,
-            or just give the user as a reward
+            or just give the user as a currencies
             </summary>
+        </member>
+        <member name="M:RGN.Modules.Currency.CurrencyModule.GetRGNCoinEconomyAsync">
+            <summary>
+            Gets the information for rgn-coin prices
+            You need to use the in-app purchase process to sell rgn-coin
+            rgn-coin is used for purchasing NFT virtual items
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RGN.Modules.Currency.CurrencyModule.PurchaseRGNCoinAsync(System.String)">
+            <summary>
+            Adds the rgn-coin currency to the user in
+            in-app purchase plugin callback after verifying the reciept locally
+            1. Start in-app purchase process
+            2. Wait for user purchase
+            3. Verify the reciept after successful purchase
+            4. Cann this method with the appropriate in-app item id (<see cref="M:RGN.Modules.Currency.CurrencyModule.GetRGNCoinEconomyAsync"/>)
+            </summary>
+            <param name="iapUUID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RGN.Modules.Currency.CurrencyModule.GetInAppPurchaseCurrencyDataAsync">
+            <summary>
+            Gets all available currency product from Ready backend
+            The list can contain any game specific currencies
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RGN.Modules.Currency.CurrencyModule.PurchaseCurrencyProductAsync(System.String)">
+            <summary>
+            Adds any project specific currency to the users profile.
+            You can also use this method without going to the in-app purchase process if you want to give the player a currencies
+            </summary>
+            <param name="productId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RGN.Modules.Currency.CurrencyModule.AddCurrencyAsync(System.Collections.Generic.List{RGN.Modules.Currency.Currency})">
+            <summary>
+            Adds any "soft" currency to the user profile.
+            If the currency is registered as a product (<see cref="M:RGN.Modules.Currency.CurrencyModule.GetInAppPurchaseCurrencyDataAsync"/>)
+            then this operation will fail. It is allowed to add only currency products
+            that are not for sale as a in-app purchase item
+            </summary>
+            <param name="currencies">The currencies to add</param>
+            <returns>Updated user currencies</returns>
         </member>
     </members>
 </doc>
