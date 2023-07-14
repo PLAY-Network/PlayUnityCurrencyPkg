@@ -85,7 +85,7 @@ namespace RGN.Samples
                 var currencyToAdd = new List<Currency>() {
                     new Currency(currencyName, quantity)
                 };
-                await CurrencyModule.I.AddCurrencyAsync(currencyToAdd);
+                await CurrencyModule.I.AddUserCurrenciesAsync(currencyToAdd);
             }
             catch (System.Exception ex)
             {

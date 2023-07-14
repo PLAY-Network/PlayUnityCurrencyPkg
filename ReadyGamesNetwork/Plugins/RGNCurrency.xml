@@ -65,7 +65,7 @@
             <param name="productId"></param>
             <returns></returns>
         </member>
-        <member name="M:RGN.Modules.Currency.CurrencyModule.AddCurrencyAsync(System.Collections.Generic.List{RGN.Modules.Currency.Currency})">
+        <member name="M:RGN.Modules.Currency.CurrencyModule.AddUserCurrenciesAsync(System.Collections.Generic.List{RGN.Modules.Currency.Currency})">
             <summary>
             Adds any "soft" currency to the user profile.
             If the currency is registered as a product (<see cref="M:RGN.Modules.Currency.CurrencyModule.GetInAppPurchaseCurrencyDataAsync"/>)
