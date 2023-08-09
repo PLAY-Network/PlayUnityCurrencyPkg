@@ -12,24 +12,6 @@
             or just give the user as a currencies
             </summary>
         </member>
-        <member name="M:RGN.Modules.Currency.CurrencyModule.SetRGNCore(RGN.IRGNRolesCore)">
-            <summary>
-            Sets the Ready Games Network (RGN) core reference.
-            </summary>
-            <param name="rgnCore">The RGN core to be set.</param>
-        </member>
-        <member name="M:RGN.Modules.Currency.CurrencyModule.Init">
-            <summary>
-            Initializes the CurrencyModule.
-            This method is currently empty and can be filled with initial setup logic if needed in the future.
-            </summary>
-        </member>
-        <member name="M:RGN.Modules.Currency.CurrencyModule.Dispose">
-            <summary>
-            Releases all resources used by the CurrencyModule.
-            This method is currently empty and can be filled with cleanup logic if needed in the future.
-            </summary>
-        </member>
         <member name="M:RGN.Modules.Currency.CurrencyModule.GetRGNCoinEconomyAsync">
             <summary>
             Gets the information for rgn-coin prices
