@@ -20,7 +20,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:RGN.Modules.Currency.CurrencyModule.PurchaseRGNCoinAsync(System.String)">
+        <member name="M:RGN.Modules.Currency.CurrencyModule.PurchaseRGNCoinAsync(System.String,System.String,System.String)">
             <summary>
             Adds the rgn-coin currency to the user in
             in-app purchase plugin callback after verifying the reciept locally
@@ -29,7 +29,9 @@
             3. Verify the reciept after successful purchase
             4. Cann this method with the appropriate in-app item id (<see cref="M:RGN.Modules.Currency.CurrencyModule.GetRGNCoinEconomyAsync"/>)
             </summary>
-            <param name="iapUUID"></param>
+            <param name="iapUUID">Unique id of the rgn-coin pack that was returned by the <see cref="M:RGN.Modules.Currency.CurrencyModule.GetRGNCoinEconomyAsync"/> method</param>
+            <param name="iapTransactionId">The transaction id of the in-app purchase</param>
+            <param name="iapReceipt">The receipt of the in-app purchase</param>
             <returns></returns>
         </member>
         <member name="M:RGN.Modules.Currency.CurrencyModule.GetInAppPurchaseCurrencyDataAsync">
