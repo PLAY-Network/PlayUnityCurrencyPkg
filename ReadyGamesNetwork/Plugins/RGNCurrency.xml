@@ -59,5 +59,11 @@
             <param name="currencies">The currencies to add</param>
             <returns>Updated user currencies</returns>
         </member>
+        <member name="M:RGN.Modules.Currency.CurrencyModule.GetUserCurrenciesAsync">
+            <summary>
+            Returns a list of the user currencies for your app. 
+            </summary>
+            <returns>List of user currencies</returns>
+        </member>
     </members>
 </doc>
