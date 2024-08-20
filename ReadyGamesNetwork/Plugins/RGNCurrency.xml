@@ -72,5 +72,37 @@
             <param name="cancellationToken">A token to cancel the operation.</param>
             <returns>List of user currencies</returns>
         </member>
+        <member name="T:RGN.Modules.Currency.Currency">
+            <summary>
+            Represents currency data
+            </summary>
+        </member>
+        <member name="F:RGN.Modules.Currency.Currency.appIds">
+            <summary>
+            List of app identifiers that this currency belongs to
+            </summary>
+        </member>
+        <member name="F:RGN.Modules.Currency.Currency.name">
+            <summary>
+            Name of the currency. Reserved name is 'rgn-coin'
+            </summary>
+        </member>
+        <member name="F:RGN.Modules.Currency.Currency.quantity">
+            <summary>
+            The amount of currency
+            </summary>
+        </member>
+        <member name="M:RGN.Modules.Currency.Currency.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:RGN.Modules.Currency.Currency.#ctor(System.String,System.Int32)">
+            <summary>
+            Constructor that accepts the name and the quauntity of a currency
+            </summary>
+            <param name="name"></param>
+            <param name="quantity"></param>
+        </member>
     </members>
 </doc>
