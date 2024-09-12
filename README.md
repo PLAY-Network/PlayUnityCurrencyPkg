@@ -1,2 +1,2 @@
 # RGN Currency
-Package version: 0.13.0-dev.590
+Package version: 0.13.0-dev.591
