@@ -72,6 +72,17 @@
             <param name="cancellationToken">A token to cancel the operation.</param>
             <returns>List of user currencies</returns>
         </member>
+        <member name="M:RGN.Modules.Currency.CurrencyModule.AddRGNCoinAsync(System.Int32,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            This endpoint adds rgn-coin to the user account.
+            It requires to white list the project. By default a project can't add rgn-coins to the users
+            </summary>
+            <param name="quantity">The amount of the rgn-coins to add</param>
+            <param name="appId">Optional appId paramter. By default current app</param>
+            <param name="userId">Optional userId parameter. By default current user</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns></returns>
+        </member>
         <member name="T:RGN.Modules.Currency.Currency">
             <summary>
             Represents currency data
@@ -103,6 +114,32 @@
             </summary>
             <param name="name"></param>
             <param name="quantity"></param>
+        </member>
+        <member name="T:RGN.Modules.Currency.AddRGNCoinRequestData">
+            <summary>
+            Request data required to add rgn-coin to the user account
+            </summary>
+        </member>
+        <member name="F:RGN.Modules.Currency.AddRGNCoinRequestData.quantity">
+            <summary>
+            Amount of the rgn-coin to add
+            </summary>
+        </member>
+        <member name="F:RGN.Modules.Currency.AddRGNCoinRequestData.requestId">
+            <summary>
+            Unique random generated string
+            </summary>
+        </member>
+        <member name="F:RGN.Modules.Currency.AddRGNCoinRequestData.userId">
+            <summary>
+            Optional parameter userId
+            By default current user
+            </summary>
+        </member>
+        <member name="F:RGN.Modules.Currency.AddRGNCoinRequestData.appId">
+            <summary>
+            Optional parameter appId
+            </summary>
         </member>
     </members>
 </doc>
