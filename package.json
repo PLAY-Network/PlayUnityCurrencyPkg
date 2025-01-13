@@ -1,5 +1,5 @@
 ﻿{
-  "name": "io.play.unity.currency",
+  "name": "network.theplay.unity.currency",
   "displayName": "PLAY SDK. Currency",
   "version": "0.16.0",
   "unity": "2020.3",
@@ -36,6 +36,6 @@
     }
   ],
   "dependencies": {
-    "io.play.unity.core": "0.16.0"
+    "network.theplay.unity.core": "0.16.0"
   }
 }
