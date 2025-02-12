@@ -7,10 +7,34 @@
         <member name="T:RGN.Modules.Currency.CurrencyModule">
             <summary>
             Module for managing in game currency (IAP)
-            The RGNCoin is a special currency that you need to sell only by in-app purchases
+            The RGNCoin (rgn-coin) is a special currency that you need to sell only by in-app purchases
             It is possible to use also custom currencies that you can sell by in-app,
             or just give the user as a currencies
             </summary>
+        </member>
+        <member name="M:RGN.Modules.Currency.CurrencyModule.GetCoinEconomyAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets the information for rgn-coin prices
+            You need to use the in-app purchase process to sell rgn-coin
+            rgn-coin is used for purchasing NFT virtual items
+            </summary>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RGN.Modules.Currency.CurrencyModule.PurchaseCoinAsync(System.String,System.Int32,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Purchases a coin pack for the user.
+            This method supports two ways to purchase: 
+                - the 'rgn-coin' packs in-app purchase
+                - the game specific coin pack. For example you can sell 'game-coin' for 'rgn-coin'
+            Note: this method requires valid ApiKey in your RGN credentials.
+            </summary>
+            <param name="coinPackId">Unique id of the coin pack that was returned by the <see cref="M:RGN.Modules.Currency.CurrencyModule.GetCoinEconomyAsync(System.Threading.CancellationToken)"/> method</param>
+            <param name="amount">The number of packs to purchase at once</param>
+            <param name="iapTransactionId">The transaction id of the in-app purchase. Provide in case 'rgn-coin' is purchased.</param>
+            <param name="iapReceipt">The receipt of the in-app purchase. Provide in case 'rgn-coin' is purchased.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns></returns>
         </member>
         <member name="M:RGN.Modules.Currency.CurrencyModule.GetRGNCoinEconomyAsync(System.Threading.CancellationToken)">
             <summary>
