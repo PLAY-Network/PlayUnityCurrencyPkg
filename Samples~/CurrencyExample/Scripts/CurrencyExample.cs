@@ -12,7 +12,6 @@ namespace RGN.Samples
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private LoadingIndicator _fullScreenLoadingIndicator;
         [SerializeField] private RectTransform _rgnCoinItemsContent;
-        [SerializeField] private RectTransform _customCoinItemsContent;
         [SerializeField] private PullToRefresh _pullToReloadTheProducts;
         [SerializeField] private TMPro.TMP_InputField _currencyNameInputField;
         [SerializeField] private TMPro.TMP_InputField _currencyQuantityInputField;
@@ -20,17 +19,14 @@ namespace RGN.Samples
 
         [Header("Prefabs")]
         [SerializeField] private RGNCoinItem _rgnCoinItemPrefab;
-        [SerializeField] private CustomCoinItem _customCoinItemPrefab;
 
         private bool _triedToLoad;
         private List<RGNCoinItem> _rgnCoinItems;
-        private List<CustomCoinItem> _customCoinItems;
 
         public override void PreInit(IRGNFrame rgnFrame)
         {
             base.PreInit(rgnFrame);
             _rgnCoinItems = new List<RGNCoinItem>();
-            _customCoinItems = new List<CustomCoinItem>();
             _pullToReloadTheProducts.RefreshRequested += ReloadAllProductsAsync;
             _addCurrencyButton.Button.onClick.AddListener(OnAddCurrencyButtonClickAsync);
         }
@@ -102,7 +98,6 @@ namespace RGN.Samples
         private async Task ReloadAllProductsAsync()
         {
             await ReloadRGNCoinOffersAsync();
-            await ReloadCustomCoinOffersAsync();
         }
         private Task ReloadRGNCoinOffersAsync()
         {
@@ -134,37 +129,6 @@ namespace RGN.Samples
                 _rgnCoinItems[i].Dispose();
             }
             _rgnCoinItems.Clear();
-        }
-        private Task ReloadCustomCoinOffersAsync()
-        {
-            DisposeCustomCoinOffers();
-            return LoadCustomCoinOffersAsync();
-        }
-        private async Task LoadCustomCoinOffersAsync()
-        {
-            SetUIInteractable(false);
-            var offers = await CurrencyModule.I.GetInAppPurchaseCurrencyDataAsync();
-            for (int i = 0; i < offers.products.Count; i++)
-            {
-                var product = offers.products[i];
-                CustomCoinItem item = Instantiate(_customCoinItemPrefab, _customCoinItemsContent);
-                item.Init(this, i, product);
-                _customCoinItems.Add(item);
-            }
-            _customCoinItemsContent.sizeDelta =
-                new Vector2(
-                    _customCoinItems.Count * (_rgnCoinItemPrefab.GetWidth() + CustomCoinItem.GAB_BETWEEN_ITEMS),
-                    0);
-            SetUIInteractable(true);
-        }
-
-        private void DisposeCustomCoinOffers()
-        {
-            for (int i = 0; i < _customCoinItems.Count; i++)
-            {
-                _customCoinItems[i].Dispose();
-            }
-            _customCoinItems.Clear();
         }
     }
 }

@@ -61,27 +61,10 @@
             <param name="cancellationToken">A token to cancel the operation.</param>
             <returns></returns>
         </member>
-        <member name="M:RGN.Modules.Currency.CurrencyModule.GetInAppPurchaseCurrencyDataAsync(System.Threading.CancellationToken)">
-            <summary>
-            Gets all available currency product from Ready backend
-            The list can contain any game specific currencies
-            </summary>
-            <param name="cancellationToken">A token to cancel the operation.</param>
-            <returns></returns>
-        </member>
-        <member name="M:RGN.Modules.Currency.CurrencyModule.PurchaseCurrencyProductAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Adds any project specific currency to the users profile.
-            You can also use this method without going to the in-app purchase process if you want to give the player a currencies
-            </summary>
-            <param name="productId"></param>
-            <param name="cancellationToken">A token to cancel the operation.</param>
-            <returns></returns>
-        </member>
         <member name="M:RGN.Modules.Currency.CurrencyModule.AddUserCurrenciesAsync(System.Collections.Generic.List{RGN.Modules.Currency.Currency},System.Threading.CancellationToken)">
             <summary>
             Adds any "soft" currency to the user profile.
-            If the currency is registered as a product (<see cref="M:RGN.Modules.Currency.CurrencyModule.GetInAppPurchaseCurrencyDataAsync(System.Threading.CancellationToken)"/>)
+            If the currency is registered as a product (<see cref="!:GetInAppPurchaseCurrencyDataAsync"/>)
             then this operation will fail. It is allowed to add only currency products
             that are not for sale as a in-app purchase item
             </summary>
